@@ -58,28 +58,16 @@ export class UserController extends BaseController<User> {
 
     }
 
-    // async checkEmail(request: Request) {
-    //     let { email } = request.body;
-    //     const _email = this.repository.findOne({email: email});
-    //     if(_email){
-    //         return { status: 400, errors: ['O E-mail já está cadastrado!'] }
-    //     }
-
-    // }
 
     async createUser(request: Request) {
-        let { firstName, lastName, birthDate, email, password, confirmPassword } = request.body;
-        super.isRequired(firstName, 'Informe seu nome');
-        super.isRequired(lastName, 'Informe seu sobrenome');
-        super.isRequired(birthDate, 'Informe sua data de nascimento');
+        let { nickName, email, password, confirmPassword } = request.body;
+        super.isRequired(nickName, 'Informe seu nome');
         super.isRequired(email, 'Informe seu e-mail');
         super.isRequired(password, 'Informe a senha');
         super.isRequired(confirmPassword, 'Informe a confirmação da senha');
 
         let _user = new User();
-        _user.firstName = firstName;
-        _user.lastName = lastName;
-        _user.birthDate = birthDate;
+        _user.nickName = nickName;
 
         const _email = await this.repository.findOne({email: email});
 
@@ -105,9 +93,7 @@ export class UserController extends BaseController<User> {
     async save(request: Request) {
         let _user = <User>request.body;
 
-        super.isRequired(_user.firstName, 'Nome é obrigatório');
-        super.isRequired(_user.lastName, 'Sobrenome é obrigatório');
-        super.isRequired(_user.birthDate, 'Data de nascimento é obrigatório');
+        super.isRequired(_user.nickName, 'Nome é obrigatório');
         super.isRequired(_user.email, 'Email é obrigatório');
 
         return await super.save(_user);
@@ -149,7 +135,6 @@ export class UserController extends BaseController<User> {
             if (_user.email) {
 
                 const transporter = nodemailer.createTransport({
-        
                     host: "smtp-mail.outlook.com",
                     secureConnection: false,
                     port: 587,
@@ -168,7 +153,7 @@ export class UserController extends BaseController<User> {
                     from: 'Adminstrador <contato.pipe@outlook.com>',
                     to: email,
                     subject: 'PiPe - Finanças Pessoais',
-                    html: `<p>Olá ${_user.firstName}, sua nova senha é: <strong>${newPassword}</strong>. Recomendamos que altere após acessar o sistema novamente.</p>
+                    html: `<p>Olá ${_user.nickName}, sua nova senha é: <strong>${newPassword}</strong>. Recomendamos que altere após acessar o sistema novamente.</p>
                     <br/><a href="google.com">Google</a>`
     
                 }).then( async () => {

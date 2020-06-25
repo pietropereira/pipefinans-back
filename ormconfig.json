@@ -1,10 +1,10 @@
 {
    "type": "mysql",
-   "host": "mysql669.umbler.com",
-   "port": 41890,
-   "username": "whoami",
-   "password": "senha1995",
-   "database": "pipedb",
+   "host": "localhost",
+   "port": 3306,
+   "username": "user",
+   "password": "senha123456789",
+   "database": "person_finance",
    "synchronize": true,
    "logging": false,
    "entities": [

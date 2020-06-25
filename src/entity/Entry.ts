@@ -22,14 +22,6 @@ export class Entry extends BaseEntity {
     @Column()
     paid: boolean;
 
-    // @Column({type: "varchar", length: 20})
-    // date: string;
-
-    // @Column({type: "int"})
-    // month: number;
-
-    // @Column({type: "int"})
-    // year: number;
     @Column({type: "date"})
     date: Date;
 
