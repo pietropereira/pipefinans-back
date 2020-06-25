@@ -14,6 +14,7 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
 app.use(auth);
 
+
 Routes.forEach(route => {
     (app as any)[route.method](route.route, (request: Request, response: Response, next: Function) => {
         const result = (new (route.controller as any))[route.action](request, response, next);
