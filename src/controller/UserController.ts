@@ -27,12 +27,17 @@ export class UserController extends BaseController<User> {
         }
 
         let check_user = await this.repository.findOne({email: email});
-        
-        let checkPassword = bcrypt.compareSync(password, check_user.password);
-        if (checkPassword) {
-            password = check_user.password;
-        }
 
+        if(check_user) {
+            let checkPassword = bcrypt.compareSync(password, check_user.password);
+            if (checkPassword) {
+                password = check_user.password;
+            }
+        }
+        else {
+            return { status: 400, message: "Usuário não encontrado!"}; 
+        }
+        
         let user = await this.repository.findOne({ email: email, password: password, deleted: false });
         if (user) {
             let _payload = {
@@ -57,7 +62,6 @@ export class UserController extends BaseController<User> {
         }
 
     }
-
 
     async createUser(request: Request) {
         let { nickName, email, password, confirmPassword } = request.body;
