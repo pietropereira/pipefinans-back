@@ -158,7 +158,7 @@ export class UserController extends BaseController<User> {
                     to: email,
                     subject: 'PiPe - Finanças Pessoais',
                     html: `<p>Olá ${_user.nickName}, sua nova senha é: <strong>${newPassword}</strong>. Recomendamos que altere após acessar o sistema novamente.</p>
-                    <br/><a href="google.com">Google</a>`
+                    <br/><a href="http://www.pipefinancaspessoais.online/login">Login</a>`
     
                 }).then( async () => {
     
