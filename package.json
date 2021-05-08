@@ -17,7 +17,7 @@
       "nodemailer": "^6.4.8",
       "nodemon": "^2.0.3",
       "reflect-metadata": "^0.1.10",
-      "typeorm": "^0.2.24"
+      "typeorm": "^0.2.25"
    },
    "scripts": {
       "start": "ts-node src/index.ts",
